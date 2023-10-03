@@ -6,39 +6,38 @@
     <title>My Web Page</title>
     <meta name="description" content="A brief description of your web page">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    
 </head>
 <body>
     <header>
-        <h1>Welcome to My Web Page</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Rock, Paper, Scissors Dojo</h1>
+
     </header>
 
     <main>
         <section>
             <h2>About Us</h2>
-            <p>This is the about section of the web page.</p>
-        </section>
+            <p>Welcome to the Dojo. You will play a total of 5 rounds. The highest score at the end WINS. Do you have what it takes?</p>
 
-        <section>
-            <h2>Services</h2>
-            <ul>
-                <li>Service 1</li>
-                <li>Service 2</li>
-                <li>Service 3</li>
-            </ul>
+            <p>Enter your selection below:</p>
+            
+            <button type="button" onclick="playRound(getComputerChoice(), 'rock');">Rock</button>
+            <button type="button" onclick="playRound(getComputerChoice(), 'paper');">Paper</button>
+            <button type="button" onclick="playRound(getComputerChoice(), 'scissors');">Scissors</button>
+
+            <h3 id="currentRound">Current Round:</h3>
+            <h3 id="roundSummary">Round Summary:</h3>            
+            <h3 id="computerScore">Computer Points:</h3>
+            <h3 id="playerScore">Player Points:</h3>
+            <h3 id="gameSummary">Game Summary:</h3>
+            <button type="button" onclick="resetGame();">Reset Game</button>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 My Web Page</p>
+        <p>&copy; 2023 BrewTech Music Ed / Whale Knocker / ScrandyPK</p>
     </footer>
+    
 </body>
+<script src="script.js"></script>
 </html>

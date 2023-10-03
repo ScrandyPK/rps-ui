@@ -1,6 +1,9 @@
 //Set player and computer scores to 0
 let playerScore = 0;
 let computerScore = 0;
+let currentRound = 0;
+let roundSummary = "";
+
 const choices = ["rock", "paper", "scissors"];
 
 //Added an array with choices and created this function to take place of the old function that generated integers and converted them to choices.
@@ -9,51 +12,58 @@ function getComputerChoice(){
     return computerChoice;
 }
 
-//Creates random integer from 1 - 3
-// function getRandomInt(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-// }
-
-// //Takes random integer and assigns a computer choice based on that number.
-// function getComputerChoice(){
-//     let computerChoice = getRandomInt(1,4);
-//     if (computerChoice == 1){
-//             computerChoice = "rock";
-//             return computerChoice;
-//         } else if (computerChoice == 2) {
-//             computerChoice = "paper";
-//             return computerChoice;
-//         } else if (computerChoice == 3) {
-//             computerChoice = "scissors";
-//             return computerChoice;
-//         }
-
-// }
-
 //Prompts the user to input their choice. Turns their choice to lower case and verifies that it is one of the available options.
 function getPlayerChoice() {
-        let playerChoice = prompt("Do you choose rock, paper, or scissors?").toLowerCase();
-        while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
-            playerChoice = prompt("Whoops, that wasn't a valid choice, try entering your selection again.").toLowerCase();
-        }
-        return playerChoice;
+    let playerChoice = prompt("Do you choose rock, paper, or scissors?").toLowerCase();
+    while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors") {
+        playerChoice = prompt("Whoops, that wasn't a valid choice, try entering your selection again.").toLowerCase();
+    }
+    return playerChoice;
+}
+
+//Updates the Scores on the HTML Side
+function updateScores() {
+    document.getElementById("computerScore").textContent = `Computer Points: ${computerScore}`;
+    document.getElementById("playerScore").textContent = `Player Points: ${playerScore}`;
+    document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
+    document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
+}
+
+function gameSummary() {
+    if (playerScore > computerScore){
+        document.getElementById("gameSummary").textContent = `You win! Player Score: ${playerScore} - Computer Score ${computerScore}`
+    } else if (playerScore < computerScore){
+        document.getElementById("gameSummary").textContent = `You lose! Player Score: ${playerScore} - Computer Score ${computerScore}`
+    } else {
+        document.getElementById("gameSummary").textContent = `It was a draw. ${playerScore} - ${computerScore}`
+    }
+}
+
+function resetGame(){
+    computerScore = 0;
+    playerScore = 0;
+    currentRound = 0;
+    document.getElementById("roundSummary").innerHTML = `Round Summary:`;
+    document.getElementById("gameSummary").textContent = ``
+    updateScores();
 }
 
 //Takes the computer choice and the player choice and plays a round of Rock, Paper, Scissors. The output shares information about the round and it returns a score to whomever won that round, if there was a winner.
 function playRound(computerSelection, playerSelection) {
     if (playerSelection === computerSelection){
-        console.log("Draw, you both played " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".");
-        alert("Draw, you both played " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".");
+        roundSummary = "Draw, you both played " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".";
     } else if ((playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper")){
-        console.log("You win! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
-        alert("You win! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
-        return playerScore++;
+        roundSummary = "You won that round! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
+        playerScore++;
     } else {
-        console.log("You lose! " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + " beats " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".");
-        alert("You lose! " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + " beats " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".");
-        return computerScore++;
+        roundSummary = "You lost that round! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
+        computerScore++;
+    }
+    currentRound++;
+    updateScores();
+    
+    if (currentRound === 5){
+        gameSummary();
     }
 }
 
@@ -84,3 +94,10 @@ function playGame(){
 
     resetScore();
 }
+document.getElementById("computerScore").innerHTML = `Current Computer Score: ${computerScore}`;
+
+document.getElementById("playerScore").innerHTML = `Current Player Score: ${playerScore}`;
+
+document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
+
+document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
