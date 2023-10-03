@@ -1,7 +1,4 @@
-document.getElementById("computerScore").innerHTML = `Current Computer Score: ${computerScore}`;
-document.getElementById("playerScore").innerHTML = `Current Player Score: ${playerScore}`;
-document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
-document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
+
 
 //Set player and computer scores to 0
 let playerScore = 0;
@@ -80,5 +77,10 @@ function resetScore(){
     computerScore = 0;
     playerScore = 0;
 }
+
+document.getElementById("computerScore").innerHTML = `Current Computer Score: ${computerScore}`;
+document.getElementById("playerScore").innerHTML = `Current Player Score: ${playerScore}`;
+document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
+document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
 
 
