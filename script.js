@@ -1,9 +1,15 @@
+document.getElementById("computerScore").innerHTML = `Current Computer Score: ${computerScore}`;
+document.getElementById("playerScore").innerHTML = `Current Player Score: ${playerScore}`;
+document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
+document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
+
 //Set player and computer scores to 0
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 0;
 let roundSummary = "";
 
+//Array that the computerChoice pulls from.
 const choices = ["rock", "paper", "scissors"];
 
 //Added an array with choices and created this function to take place of the old function that generated integers and converted them to choices.
@@ -29,6 +35,7 @@ function updateScores() {
     document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
 }
 
+//Prints the summary of the game
 function gameSummary() {
     if (playerScore > computerScore){
         document.getElementById("gameSummary").textContent = `You win! Player Score: ${playerScore} - Computer Score ${computerScore}`
@@ -39,6 +46,7 @@ function gameSummary() {
     }
 }
 
+//Resets everything so you don't have to refresh the page.
 function resetGame(){
     computerScore = 0;
     playerScore = 0;
@@ -48,7 +56,7 @@ function resetGame(){
     updateScores();
 }
 
-//Takes the computer choice and the player choice and plays a round of Rock, Paper, Scissors. The output shares information about the round and it returns a score to whomever won that round, if there was a winner.
+//Takes the computer choice and the player choice and plays a round of Rock, Paper, Scissors. The output shares information about the round and it returns a score to whomever won that round, if there was a winner. When 5 rounds are reached, the summary is printed.
 function playRound(computerSelection, playerSelection) {
     if (playerSelection === computerSelection){
         roundSummary = "Draw, you both played " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + ".";
@@ -73,31 +81,4 @@ function resetScore(){
     playerScore = 0;
 }
 
-//Plays 5 rounds. Gives information about each round. After 5 rounds it shares the results and resets the scores to zero.
-function playGame(){
-    for (let i = 0; i < 5; i++){
-    const computerSelection = getComputerChoice();
-    const playerSelection = getPlayerChoice();
-    playRound(computerSelection, playerSelection);
-    alert("After " + (i+1) + " rounds, the score is " + playerScore + " to " + computerScore + ".");
-    console.log("After " + (i+1) + " round(s), the score is " + playerScore + " to " + computerScore + ".");
-    console.log("-----");
-    }
-    
-    if (playerScore === computerScore){
-        console.log("The game was a draw! Nice try.");
-    }   else if (playerScore > computerScore){
-        console.log("You win...you must have been practicing!");
-    }   else {
-        console.log("You lose...do you even know how to play this game?");
-    }
 
-    resetScore();
-}
-document.getElementById("computerScore").innerHTML = `Current Computer Score: ${computerScore}`;
-
-document.getElementById("playerScore").innerHTML = `Current Player Score: ${playerScore}`;
-
-document.getElementById("currentRound").innerHTML = `Current Round: ${currentRound}`;
-
-document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
