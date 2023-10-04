@@ -43,6 +43,13 @@ function gameSummary() {
     }
 }
 
+function clearDom(){
+    document.getElementById("computerScore").innerHTML = "";
+    document.getElementById("playerScore").innerHTML = "";
+    document.getElementById("currentRound").innerHTML = "";
+    document.getElementById("roundSummary").innerHTML = `Round Summary: ${roundSummary}`;
+}
+
 //Resets everything so you don't have to refresh the page.
 function resetGame(){
     computerScore = 0;
@@ -61,13 +68,14 @@ function playRound(computerSelection, playerSelection) {
         roundSummary = "You won that round! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
         playerScore++;
     } else {
-        roundSummary = "You lost that round! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " beats " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
+        roundSummary = "You lost that round! " + playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1) + " loses to " + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1);
         computerScore++;
     }
     currentRound++;
     updateScores();
     
-    if (currentRound === 5){
+    if (currentRound >= 5){
+        clearDom();
         gameSummary();
     }
 }

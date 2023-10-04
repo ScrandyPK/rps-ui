@@ -1,0 +1,15 @@
+
+/* Created a hover effect on the selection buttons and gave it a delay in the transition to that color */
+button {
+    transition-duration: .4s;
+}
+
+button:hover {
+    background-color: plum;
+    color: whitesmoke;
+}
+
+header:hover {
+    background-color: purple;
+    color: brown;
+}
